@@ -1,5 +1,7 @@
 # 📝 Todo App - Console Based
 
+![CI/CD Pipeline](https://github.com/Niom018/Console-based-ToDo-app/actions/workflows/ci.yml/badge.svg)
+
 A console-based CRUD Todo application built with **JavaScript (Node.js)** and **MySQL**.
 
 ## 🚀 Features
@@ -113,6 +115,32 @@ Console-based-ToDo-app/
 | createdAt   | TIMESTAMP                |
 | updatedAt   | TIMESTAMP                |
 
+
+## 🧪 Testing
+
+Automated tests (Jest) run against a real MySQL instance, covering registration, login, and task CRUD operations.
+
+```bash
+npm test
+```
+
+## 🐳 Docker
+
+Run the app in a container alongside MySQL:
+
+```bash
+docker compose up --build
+```
+
+## ⚙️ CI/CD Pipeline
+
+On every push/PR to `main`, GitHub Actions:
+1. Spins up a MySQL service container
+2. Installs dependencies
+3. Runs the automated test suite against MySQL
+4. Builds the Docker image
+
+See [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
 ## 🎥 Demo Video
 [▶️ Watch Demo Video](https://drive.google.com/file/d/1tJ3WBuh90HuCWUuaK78Q15RH5t3cDvjz/view?usp=sharing)
