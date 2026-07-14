@@ -21,7 +21,7 @@ A console-based CRUD Todo application built with **JavaScript (Node.js)** and **
 
 1. Clone the repository
 ```bash
-   git clone https://github.com/Niom018/Console-based-ToDo-app.git
+   git clone https://github.com/Niom018/ToDo-App-Devops-Pipeline.git
    cd todo-app
 ```
 
