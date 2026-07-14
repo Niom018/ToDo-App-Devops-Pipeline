@@ -1,6 +1,6 @@
 # 📝 Todo App - Console Based
 
-![CI/CD Pipeline](https://github.com/Niom018/Console-based-ToDo-app/actions/workflows/ci.yml/badge.svg)
+![CI/CD Pipeline](https://github.com/Niom018/ToDo-App-Devops-Pipeline/actions/workflows/ci.yml/badge.svg)
 
 A console-based CRUD Todo application built with **JavaScript (Node.js)** and **MySQL**.
 
