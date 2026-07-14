@@ -1,146 +1,101 @@
-# 📝 Todo App - Console Based
+# 📝 Todo App — DevOps CI/CD Pipeline
 
-![CI/CD Pipeline](https://github.com/Niom018/Console-based-ToDo-app/actions/workflows/ci.yml/badge.svg)
+![CI/CD Pipeline](https://github.com/Niom018/ToDo-App-Devops-Pipeline/actions/workflows/ci.yml/badge.svg)
 
-A console-based CRUD Todo application built with **JavaScript (Node.js)** and **MySQL**.
+A console-based CRUD Todo app (Node.js + MySQL) wrapped with a full DevOps pipeline: automated testing, containerization, and CI/CD via GitHub Actions.
 
-## 🚀 Features
-- User Registration & Login
-- Add, View, Edit, Delete Tasks
-- Search Tasks by title or description
-- Input validation for all fields
-- MySQL database integration
+> This is the DevOps-enhanced version of the original console app. Core application logic lives in the base project: [Console-based-ToDo-app](https://github.com/Niom018/Console-based-ToDo-app).
+
+## 🚀 DevOps Highlights
+
+- **Automated testing** — 9 Jest integration tests running against a real MySQL instance (not mocks), covering auth and task CRUD operations
+- **Containerization** — Dockerfile + `docker-compose.yml` for a reproducible app + database environment
+- **CI/CD pipeline** — GitHub Actions workflow that on every push/PR to `main`:
+  1. Spins up a MySQL service container
+  2. Installs dependencies
+  3. Runs the full automated test suite against MySQL
+  4. Builds the Docker image
+- **Pipeline as code** — see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 
 ## 🛠️ Tech Stack
-- Node.js
-- MySQL2
-- dotenv
-- readline-sync
 
-## ⚙️ Setup Instructions
+**App:** Node.js · MySQL2 · dotenv · readline-sync
+**DevOps:** Docker · Docker Compose · GitHub Actions · Jest
 
-1. Clone the repository
+## ⚙️ Quick Start (Docker)
+
 ```bash
-   git clone https://github.com/Niom018/Console-based-ToDo-app.git
-   cd todo-app
+git clone https://github.com/Niom018/ToDo-App-Devops-Pipeline.git
+cd ToDo-App-Devops-Pipeline
+docker compose up --build
 ```
 
-2. Install dependencies
+This spins up the app alongside a MySQL container — no manual DB setup needed.
+
+## ⚙️ Manual Setup
+
+1. Install dependencies
 ```bash
-   npm install
+npm install
 ```
 
-3. Create `.env` file from example
+2. Create `.env` from example and fill in your MySQL credentials
 ```bash
-   cp .env.example .env
+cp .env.example .env
 ```
-
-4. Fill in your MySQL credentials in `.env`
 ```env
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=my_password
-   DB_NAME=todo_app
-   DB_PORT=3306
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=my_password
+DB_NAME=todo_app
+DB_PORT=3306
 ```
 
-5. Create the database in MySQL
+3. Create the database
 ```sql
-   CREATE DATABASE todo_app;
+CREATE DATABASE todo_app;
 ```
 
-6. Run the application
+4. Run the app
 ```bash
-   node app.js
+node app.js
 ```
 
-## 📁 Project Structure
-
-Console-based-ToDo-app/
-
-├── src/
-
-│   ├── config/
-
-│   │   └── db.js
-
-│   ├── models/
-
-│   │   └── initDB.js
-
-│   ├── services/
-
-│   │   ├── authService.js
-
-│   │   └── taskService.js
-
-│   ├── menus/
-
-│   │   ├── mainMenu.js
-
-│   │   └── taskMenu.js
-
-│   └── utils/
-
-│       └── validators.js
-
-├── .env.example
-
-├── .gitignore
-
-├── app.js
-
-└── README.md
-
-## 🗄️ Database Schema
-
-### Users Table
-| Column   | Type          |
-|----------|---------------|
-| id       | INT (PK)      |
-| name     | VARCHAR(100)  |
-| email    | VARCHAR(100)  |
-| password | VARCHAR(255)  |
-
-### Tasks Table
-| Column      | Type                     |
-|-------------|--------------------------|
-| id          | INT (PK)                 |
-| userId      | INT (FK)                 |
-| title       | VARCHAR(255)             |
-| description | TEXT                     |
-| dueDate     | DATE                     |
-| priority    | ENUM(Low, Medium, High)  |
-| status      | ENUM(Pending, Completed) |
-| createdAt   | TIMESTAMP                |
-| updatedAt   | TIMESTAMP                |
-
-
-## 🧪 Testing
-
-Automated tests (Jest) run against a real MySQL instance, covering registration, login, and task CRUD operations.
+## 🧪 Running Tests
 
 ```bash
 npm test
 ```
 
-## 🐳 Docker
+Runs Jest against a live MySQL database, covering registration, login, and task CRUD (add/edit/delete) — including validation edge cases.
 
-Run the app in a container alongside MySQL:
+## 📁 Project Structure
 
-```bash
-docker compose up --build
-```
+ToDo-App-Devops-Pipeline/
+├── .github/
+│   └── workflows/
+│       └── ci.yml          # CI/CD pipeline definition
+├── src/
+│   ├── config/db.js
+│   ├── models/initDB.js
+│   ├── services/
+│   │   ├── authService.js
+│   │   └── taskService.js
+│   ├── menus/
+│   └── utils/validators.js
+├── tests/
+│   ├── authService.test.js
+│   └── taskService.test.js
+├── Dockerfile
+├── docker-compose.yml
+├── .dockerignore
+├── .env.example
+└── app.js
 
-## ⚙️ CI/CD Pipeline
+## 🗄️ Database Schema
 
-On every push/PR to `main`, GitHub Actions:
-1. Spins up a MySQL service container
-2. Installs dependencies
-3. Runs the automated test suite against MySQL
-4. Builds the Docker image
-
-See [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+**Users** — id, name, email, password
+**Tasks** — id, userId (FK), title, description, dueDate, priority (Low/Medium/High), status (Pending/Completed), createdAt, updatedAt
 
 ## 🎥 Demo Video
 [▶️ Watch Demo Video](https://drive.google.com/file/d/1tJ3WBuh90HuCWUuaK78Q15RH5t3cDvjz/view?usp=sharing)
